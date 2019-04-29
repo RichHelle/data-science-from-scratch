@@ -1,4 +1,3 @@
-from __future__ import division
 import math, random, re
 from collections import defaultdict, Counter
 from bs4 import BeautifulSoup
@@ -18,7 +17,7 @@ def plot_resumes(plt):
         return 8 + total / 200 * 20
 
     for word, job_popularity, resume_popularity in data:
-        plt.text(job_popularity, resume_popularity, word, 
+        plt.text(job_popularity, resume_popularity, word,
                  ha='center', va='center',
                  size=text_size(job_popularity + resume_popularity))
     plt.xlabel("Popularity on Job Postings")
@@ -39,7 +38,7 @@ def get_document():
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html5lib')
 
-    content = soup.find("div", "entry-content")        # find entry-content div
+    content = soup.find("div", "article-body")         # find article-body div
     regex = r"[\w']+|[\.]"                             # matches a word or a period
 
     document = []
@@ -71,7 +70,7 @@ def generate_using_trigrams(starts, trigram_transitions):
         prev, current = current, next
         result.append(current)
 
-        if current == ".": 
+        if current == ".":
             return " ".join(result)
 
 def is_terminal(token):
@@ -82,7 +81,7 @@ def expand(grammar, tokens):
 
         # ignore terminals
         if is_terminal(token): continue
-        
+
         # choose a replacement at random
         replacement = random.choice(grammar[token])
 
@@ -102,7 +101,7 @@ def generate_sentence(grammar):
 # Gibbs Sampling
 #
 
-def roll_a_die(): 
+def roll_a_die():
     return random.choice([1,2,3,4,5,6])
 
 def direct_sample():
@@ -129,7 +128,7 @@ def gibbs_sample(num_iters=100):
     for _ in range(num_iters):
         x = random_x_given_y(y)
         y = random_y_given_x(x)
-    return x, y 
+    return x, y
 
 def compare_distributions(num_samples=1000):
     counts = defaultdict(lambda: [0, 0])
@@ -145,7 +144,7 @@ def compare_distributions(num_samples=1000):
 def sample_from(weights):
     total = sum(weights)
     rnd = total * random.random()       # uniform between 0 and total
-    for i, w in enumerate(weights):     
+    for i, w in enumerate(weights):
         rnd -= w                        # return the smallest i such that
         if rnd <= 0: return i           # sum(weights[:(i+1)]) >= rnd
 
@@ -176,7 +175,7 @@ topic_word_counts = [Counter() for _ in range(K)]
 
 topic_counts = [0 for _ in range(K)]
 
-document_lengths = map(len, documents)
+document_lengths = [len(d) for d in documents]
 
 distinct_words = set(word for document in documents for word in document)
 W = len(distinct_words)
@@ -187,14 +186,14 @@ def p_topic_given_document(topic, d, alpha=0.1):
     """the fraction of words in document _d_
     that are assigned to _topic_ (plus some smoothing)"""
 
-    return ((document_topic_counts[d][topic] + alpha) / 
+    return ((document_topic_counts[d][topic] + alpha) /
             (document_lengths[d] + K * alpha))
 
 def p_word_given_topic(word, topic, beta=0.1):
     """the fraction of words assigned to _topic_
     that equal _word_ (plus some smoothing)"""
 
-    return ((topic_word_counts[topic][word] + beta) / 
+    return ((topic_word_counts[topic][word] + beta) /
             (topic_counts[topic] + W * beta))
 
 def topic_weight(d, word, k):
@@ -204,7 +203,7 @@ def topic_weight(d, word, k):
     return p_word_given_topic(word, k) * p_topic_given_document(k, d)
 
 def choose_new_topic(d, word):
-    return sample_from([topic_weight(d, word, k) 
+    return sample_from([topic_weight(d, word, k)
                         for k in range(K)])
 
 
@@ -220,7 +219,7 @@ for d in range(D):
 
 for iter in range(1000):
     for d in range(D):
-        for i, (word, topic) in enumerate(zip(documents[d], 
+        for i, (word, topic) in enumerate(zip(documents[d],
                                               document_topics[d])):
 
             # remove this word / topic from the counts
@@ -244,20 +243,20 @@ if __name__ == "__main__":
 
     document = get_document()
 
-    bigrams = zip(document, document[1:])
+    bigrams = list(zip(document, document[1:]))
     transitions = defaultdict(list)
     for prev, current in bigrams:
         transitions[prev].append(current)
 
     random.seed(0)
-    print "bigram sentences"
+    print("bigram sentences")
     for i in range(10):
-        print i, generate_using_bigrams(transitions)
-    print
+        print(i, generate_using_bigrams(transitions))
+    print()
 
     # trigrams
 
-    trigrams = zip(document, document[1:], document[2:])
+    trigrams = list(zip(document, document[1:], document[2:]))
     trigram_transitions = defaultdict(list)
     starts = []
 
@@ -268,16 +267,16 @@ if __name__ == "__main__":
 
         trigram_transitions[(prev, current)].append(next)
 
-    print "trigram sentences"
+    print("trigram sentences")
     for i in range(10):
-        print i, generate_using_trigrams(starts, trigram_transitions)
-    print
+        print(i, generate_using_trigrams(starts, trigram_transitions))
+    print()
 
     grammar = {
         "_S"  : ["_NP _VP"],
-        "_NP" : ["_N", 
+        "_NP" : ["_N",
                  "_A _NP _P _A _N"],
-        "_VP" : ["_V", 
+        "_VP" : ["_V",
                  "_V _NP"],
         "_N"  : ["data science", "Python", "regression"],
         "_A"  : ["big", "linear", "logistic"],
@@ -285,31 +284,31 @@ if __name__ == "__main__":
         "_V"  : ["learns", "trains", "tests", "is"]
     }
 
-    print "grammar sentences"
+    print("grammar sentences")
     for i in range(10):
-        print i, " ".join(generate_sentence(grammar))
-    print
+        print(i, " ".join(generate_sentence(grammar)))
+    print()
 
-    print "gibbs sampling"
+    print("gibbs sampling")
     comparison = compare_distributions()
-    for roll, (gibbs, direct) in comparison.iteritems():
-        print roll, gibbs, direct
+    for roll, (gibbs, direct) in comparison.items():
+        print(roll, gibbs, direct)
 
 
     # topic MODELING
 
     for k, word_counts in enumerate(topic_word_counts):
         for word, count in word_counts.most_common():
-            if count > 0: print k, word, count
+            if count > 0: print(k, word, count)
 
     topic_names = ["Big Data and programming languages",
-                   "Python and statistics",
                    "databases",
-                   "machine learning"]
+                   "machine learning",
+                   "statistics"]
 
     for document, topic_counts in zip(documents, document_topic_counts):
-        print document
+        print(document)
         for topic, count in topic_counts.most_common():
             if count > 0:
-                print topic_names[topic], count,
-        print
+                print(topic_names[topic], count)
+        print()

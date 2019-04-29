@@ -1,50 +1,47 @@
 Data Science from Scratch
 =========================
 
-Here's all the code and examples from my book __[Data Science from Scratch](http://joelgrus.com/2015/04/26/data-science-from-scratch-first-principles-with-python/)__.
+Here's all the code and examples from the second edition of my book _Data Science from Scratch_. They require at least Python 3.6.
 
-Each can be imported as a module, for example (after you cd into the /code directory):
+(If you're looking for the code and examples from the first edition, that's in the `first-edition` folder.)
 
-```python
-from linear_algebra import distance, vector_mean
-v = [1, 2, 3]
-w = [4, 5, 6]
-print distance(v, w)
-print vector_mean([v, w])
+If you want to use the code, you should be able to clone the repo and just do things like
+
 ```
-  
-Or can be run from the command line to get a demo of what it does (and to execute the examples from the book):
+In [1]: from scratch.linear_algebra import dot
 
-```bat
-python recommender_systems.py
-```  
+In [2]: dot([1, 2, 3], [4, 5, 6])
+Out[2]: 32
+```
 
-Additionally, I've collected all the [links](https://github.com/joelgrus/data-science-from-scratch/blob/master/links.md) from the book.
+and so on and so forth.
 
 ## Table of Contents
 
 1. Introduction
 2. A Crash Course in Python
-3. [Visualizing Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/visualizing_data.py)
-4. [Linear Algebra](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/linear_algebra.py)
-5. [Statistics](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/statistics.py)
-6. [Probability](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/probability.py)
-7. [Hypothesis and Inference](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/hypothesis_and_inference.py)
-8. [Gradient Descent](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/gradient_descent.py)
-9. [Getting Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/getting_data.py)
-10. [Working With Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/working_with_data.py)
-11. [Machine Learning](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/machine_learning.py)
-12. [k-Nearest Neighbors](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/nearest_neighbors.py)
-13. [Naive Bayes](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/naive_bayes.py)
-14. [Simple Linear Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/simple_linear_regression.py)
-15. [Multiple Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/multiple_regression.py)
-16. [Logistic Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/logistic_regression.py)
-17. [Decision Trees](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/decision_trees.py)
-18. [Neural Networks](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/neural_networks.py)
-19. [Clustering](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/clustering.py)
-20. [Natural Language Processing](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/natural_language_processing.py)
-21. [Network Analysis](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/network_analysis.py)
-22. [Recommender Systems](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/recommender_systems.py)
-23. [Databases and SQL](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/databases.py)
-24. [MapReduce](https://github.com/joelgrus/data-science-from-scratch/blob/master/code/mapreduce.py)
-25. Go Forth And Do Data Science
+3. [Visualizing Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/visualization.py)
+4. [Linear Algebra](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/linear_algebra.py)
+5. [Statistics](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/statistics.py)
+6. [Probability](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/probability.py)
+7. [Hypothesis and Inference](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/hypothesis_and_inference.py)
+8. [Gradient Descent](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/gradient_descent.py)
+9. [Getting Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/getting_data.py)
+10. [Working With Data](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/working_with_data.py)
+11. [Machine Learning](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/machine_learning.py)
+12. [k-Nearest Neighbors](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/nearest_neighbors.py)
+13. [Naive Bayes](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/naive_bayes.py)
+14. [Simple Linear Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/simple_linear_regression.py)
+15. [Multiple Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/multiple_regression.py)
+16. [Logistic Regression](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/logistic_regression.py)
+17. [Decision Trees](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/decision_trees.py)
+18. [Neural Networks](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/neural_networks.py)
+19. [Deep Learning]
+20. [Clustering](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/clustering.py)
+21. [Natural Language Processing](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/natural_language_processing.py)
+22. [Network Analysis](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/network_analysis.py)
+23. [Recommender Systems](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/recommender_systems.py)
+24. [Databases and SQL](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/databases.py)
+25. [MapReduce](https://github.com/joelgrus/data-science-from-scratch/blob/master/scratch/mapreduce.py)
+26. Data Ethics
+27. Go Forth And Do Data Science
